@@ -1,18 +1,19 @@
-import { initFirebase } from "../firebaseApp";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { db } from "../firebaseApp";
+import { collection, getDocs } from "firebase/firestore";
 
-const db = getFirestore(initFirebase)
-export default async function getDoument(collection, id) {
-    let docRef = doc(db, collection, id);
+export default async function getData () {
 
-    let result = null;
+    let querySnapshot = null;
     let error = null;
-
+    
     try {
-        result = await getDoc(docRef);
+        querySnapshot = await getDocs(collection(db, "quotes"));
+        querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+        });
     } catch (e) {
         error = e;
     }
 
-    return { result, error };
+    return { querySnapshot, error };
 }

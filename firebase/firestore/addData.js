@@ -1,18 +1,17 @@
-import { initFirebase } from "../firebaseApp";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { db } from "../firebaseApp";
+import { collection, doc, setDoc } from "firebase/firestore";
 
-const db = getFirestore(initFirebase);
-export default async function addData(colllection, id, data) {
-    let result = null;
+export default async function addData() {
+
+    let newQuoteRef = null;
     let error = null;
 
     try {
-        result = await setDoc(doc(db, colllection, id), data, {
-            merge: true,
-        });
+        newQuoteRef = await addDoc(collection(db, "quotes"))
+        console.log("Document written with ID: ", newQuoteRef.id);
     } catch (e) {
         error = e;
     }
 
-    return { result, error };
+    return { newQuoteRef, error };
 }
