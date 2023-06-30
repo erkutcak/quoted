@@ -1,13 +1,14 @@
-import { initFirebase } from "../firebaseApp";
+import initFirebase from "../firebaseApp";
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 
-const auth = getAuth(initFirebase());
+const auth = getAuth(initFirebase);
 
 export default async function signIn(email, password) {
     let result = null,
         error = null;
     try {
-        result = await signInWithEmailAndPassword(auth, email, password);
+        result = await signInWithEmailAndPassword(auth, email, password).then((user) => {
+            console.log(user)})
     } catch (e) {
         error = e;
     }
