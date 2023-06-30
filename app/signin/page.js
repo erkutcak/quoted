@@ -1,9 +1,9 @@
 'use client'
 import React from "react";
-import signIn from "@/firebase/auth/signin";
+import signIn from "../../firebase/auth/signin";
 import { useRouter } from 'next/navigation'
 
-function Page() {
+export default function SignIn() {
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
     const router = useRouter()
@@ -23,7 +23,7 @@ function Page() {
     }
     return (<div className="wrapper">
         <div className="form-wrapper">
-            <h1 className="mt-60 mb-30">Sign in</h1>
+            <h1>Sign in</h1>
             <form onSubmit={handleForm} className="form">
                 <label htmlFor="email">
                     <p>Email</p>
@@ -38,5 +38,3 @@ function Page() {
         </div>
     </div>);
 }
-
-export default Page;
