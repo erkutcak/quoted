@@ -1,10 +1,14 @@
 'use client'
 
 import Link from "next/link"
+import { useAuthContext } from "../app/context/AuthContext";
 
 export default function Navbar() {
+    const { user } = useAuthContext()
+    console.log(user);
 
     return (
+        user && (
         <div className="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600"> 
             <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium">
                 <Link href="/home" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group rounded-l-full">
@@ -23,8 +27,8 @@ export default function Navbar() {
                         <span className="w-16 text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">My Quotes</span>
                     </button>
                 </Link>
-                <Link href="/newquote" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-                    <button type="button" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
+                <Link href="/newquote" className="inline-flex flex-col items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-800 group">
+                    <button type="button" className="inline-flex flex-col items-center justify-center hover:bg-gray-50 dark:hover:bg-gray-800 group">
                         <svg className="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                             <path clipRule="evenodd" fillRule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"></path>
                         </svg>
@@ -41,5 +45,6 @@ export default function Navbar() {
                 </Link>
             </div>
         </div>
+        )
     )
 }
