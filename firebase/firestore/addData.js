@@ -1,7 +1,7 @@
 import { initFirebase } from "../firebaseApp";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 
-const db = getFirestore(initFirebase());
+const db = getFirestore(initFirebase);
 export default async function addData(colllection, id, data) {
     let result = null;
     let error = null;

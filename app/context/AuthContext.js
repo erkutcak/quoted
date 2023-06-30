@@ -1,13 +1,10 @@
 'use client';
 
 import React from 'react';
-import {
-    onAuthStateChanged,
-    getAuth,
-} from 'firebase/auth';
-import initFirebase from "../../firebase/firebaseApp";
+import { onAuthStateChanged } from 'firebase/auth';
+import { initFirebase } from "../../firebase/firebaseApp";
 
-const auth = getAuth(initFirebase);
+const auth = initFirebase;
 
 export const AuthContext = React.createContext({});
 
@@ -31,6 +28,8 @@ export const AuthContextProvider = ({
 
         return () => unsubscribe();
     }, []);
+
+    
 
     return (
         <AuthContext.Provider value={{ user }}>

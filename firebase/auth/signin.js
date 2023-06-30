@@ -1,7 +1,7 @@
-import initFirebase from "../firebaseApp";
+import { initFirebase } from "../firebaseApp";
 import { signInWithEmailAndPassword, getAuth } from "firebase/auth";
 
-const auth = getAuth(initFirebase);
+const auth = initFirebase;
 
 export default async function signIn(email, password) {
     let result = null,

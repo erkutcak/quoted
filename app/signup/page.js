@@ -2,6 +2,7 @@
 import React from "react";
 import signUp from "../../firebase/auth/signup";
 import { useRouter } from 'next/navigation'
+import Link from "next/link";
 
 export default function SignUp() {
     const [email, setEmail] = React.useState('')
@@ -19,7 +20,7 @@ export default function SignUp() {
 
         // else successful
         console.log(result)
-        return router.push("/admin")
+        return router.push("/home")
     }
     return (<div className="wrapper">
         <div className="form-wrapper">
@@ -34,6 +35,9 @@ export default function SignUp() {
                     <input onChange={(e) => setPassword(e.target.value)} required type="password" name="password" id="password" placeholder="password" />
                 </label>
                 <button type="submit">Sign up</button>
+                <Link href="/">
+                    <button>Back</button>
+                </Link>
             </form>
         </div>
     </div>);
