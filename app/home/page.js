@@ -43,18 +43,18 @@ export default function Home() {
     const displayQuotes = quotes.map((quote, idx) => {
         const seconds = quote.date.seconds;
         const nanoseconds = quote.date.nanoseconds;
-        const milliseconds = seconds * 1000 + Math.floor(nanoseconds / 1000000); // Calculate milliseconds
-        const date = new Date(milliseconds); // Create JavaScript Date object
+        const milliseconds = seconds * 1000 + Math.floor(nanoseconds / 1000000);
+        const date = new Date(milliseconds);
         const dateString = date.toLocaleString();
         return (
-          <Quote quote={quote} date={dateString} key={`${idx}-${quote.title}`}/>
+            <Quote quote={quote} date={dateString} key={`${idx}-${quote.title}`}/>
         )
     })
 
-  return (
-    <div>
-        <h1>Homepage</h1>
-        {displayQuotes}
-    </div>
-  )
+    return (
+        <div>
+            <h1>Homepage</h1>
+            {displayQuotes}
+        </div>
+    )
 }

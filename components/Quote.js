@@ -9,6 +9,7 @@ export default function Quote ({ quote, date }) {
             <h3>{`"${quote.title}"`}</h3>
             <h4>{`-${quote.author}`}</h4>
             <h5>{date}</h5>
+            <h5>Likes: {quote.likes}</h5>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import { initFirebase } from "../firebaseApp";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const auth = initFirebase;
 
