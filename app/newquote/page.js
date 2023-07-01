@@ -2,6 +2,21 @@
 import { db } from '@/firebase/firebaseApp';
 import { useEffect, useState, React } from 'react';
 
+// export default async function handler(req, res) {
+//   try {
+//     const response = await axios.post('/api/addData', {
+//       key1: 'value1',
+//       key2: 'value2',
+//       // add more data if needed
+//     });
+//     console.log(response.data);
+//     res.status(200).json(response.data);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(error.response.status).json({ message: error.message });
+//   }
+// }
+
 export default function NewQuote() {
 
   const [quote, setQuote] = useState('');

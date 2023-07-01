@@ -1,17 +1,17 @@
-import { db } from "../firebaseApp";
-import { collection, doc, setDoc } from "firebase/firestore";
+// import { db } from "../firebaseApp";
+// import { collection, doc, setDoc } from "firebase/firestore";
 
-export default async function addData() {
+// export default async function addData() {
 
-    let newQuoteRef = null;
-    let error = null;
+//     let newQuoteRef = null;
+//     let error = null;
 
-    try {
-        newQuoteRef = await addDoc(collection(db, "quotes"))
-        console.log("Document written with ID: ", newQuoteRef.id);
-    } catch (e) {
-        error = e;
-    }
+//     try {
+//         newQuoteRef = await addDoc(collection(db, "quotes"))
+//         console.log("Document written with ID: ", newQuoteRef.id);
+//     } catch (e) {
+//         error = e;
+//     }
 
-    return { newQuoteRef, error };
-}
+//     return { newQuoteRef, error };
+// }
