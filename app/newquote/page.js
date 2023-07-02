@@ -31,12 +31,12 @@ export default function NewQuote() {
   console.log(content);
 
   return (
-    <div className='flex flex-col items-center mt-5'>
+    <div className='flex mx-[2.5%] flex-col items-center mt-5'>
         <h1 className='font-archivoblack text-2xl mb-5'>-newquote.</h1>
-      <form className="form h-full w-full max-w-lg mx-auto mb-5 font-medium px-4 py-2 rounded-md bg-[#A37774] shadow-xl" onSubmit={onSubmit}>
-        <label className="flex flex-col">
+      <form className="form flex flex-col items-center justify-center h-full w-full max-w-lg mx-auto mb-5 font-medium px-4 py-2 rounded-md bg-[#A37774] shadow-xl" onSubmit={onSubmit}>
+        <label className="flex flex-col w-full">
             <textarea
-              className='py-4 px-6 text-white rounded-lg outlined-none border font-medium bg-[#A37774]'
+              className='py-4 px-6 text-off-white rounded-lg mt-4 outlined-none border font-medium bg-[#A37774] w-full'
               id="name"
               type="text"
               name="title"
@@ -47,7 +47,7 @@ export default function NewQuote() {
               required
             />
         </label>
-        <button className='text-off-white ml-4 mr-4 bg-steel-blue py-2 px-4 rounded' type="submit" onSubmit={onSubmit}>Submit</button>
+        <button className='text-off-white mx-4 my-4 bg-steel-blue py-2 px-4 rounded' type="submit" onSubmit={onSubmit}>Submit</button>
       </form>
     </div>
   )
