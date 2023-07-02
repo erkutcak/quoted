@@ -9,6 +9,12 @@ module.exports = {
     extend: {
       colors: {
         'off-white': '#E6E3DD',
+        'ash-black': '#2B2B2B',
+        'steel-blue': '#457EAC',
+      },
+      fontFamily: {
+        archivoblack: ['Archivo Black'],
+        montserrat: ['Montserrat']
       }
     },
   },
