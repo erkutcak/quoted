@@ -1,39 +1,34 @@
 'use client'
 import { db } from '@/firebase/firebaseApp';
 import { useEffect, useState, React } from 'react';
-
-// export default async function handler(req, res) {
-//   try {
-//     const response = await axios.post('/api/addData', {
-//       key1: 'value1',
-//       key2: 'value2',
-//       // add more data if needed
-//     });
-//     console.log(response.data);
-//     res.status(200).json(response.data);
-//   } catch (error) {
-//     console.log(error);
-//     res.status(error.response.status).json({ message: error.message });
-//   }
-// }
+import { useAuthContext } from '../context/AuthContext'
+import axios from 'axios';
 
 export default function NewQuote() {
 
-  const [quote, setQuote] = useState('');
-
-  const onSubmit =  (event) => {
-    console.log(quote)
-   try {
-     db.collection("quotes").add({
-      title : quote,
-    }).then((docRef) => {
-      console.log("Document written with ID: ", docRef.id);
+  const { user } = useAuthContext();
+  const [content, setContent] = useState({
+    title: "",
+    author: user.email,
+    likes: 0,
+    date: new Date().toISOString(),
   })
- } catch(error)  {
-      console.error("Error adding document: ", error);
-  };
-    event.preventDefault()
-  };
+
+  const onSubmit = async () => {
+    const { title, author, likes, date } = content;
+    await axios.post('/api/addData', { title, author, likes, date },  {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+  } 
+
+  const onChange = (e) => {
+    const { value, name } = e.target;
+    setContent(prevState => ({ ...prevState, [name]: value }));
+  }
+
+  console.log(content);
 
   return (
     <div>
@@ -44,14 +39,15 @@ export default function NewQuote() {
               className='py-4 px-6 text-white rounded-lg outlined-none border-none font-medium'
               id="name"
               type="text"
-              name="name"
+              name="title"
               rows='4'
-              onChange={(event) => setQuote(event.target.value)}
-              value={quote}
+              onChange={onChange}
+              value={content.title}
               placeholder='Be creative!'
+              required
             />
         </label>
-        <button type="submit">Submit</button>
+        <button type="submit" onSubmit={onSubmit}>Submit</button>
       </form>
     </div>
   )

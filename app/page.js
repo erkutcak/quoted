@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useAuthContext } from "./context/AuthContext"
-import logo2 from '../public/logo2.png'
+import logo4 from '../public/logo4.png'
 import Image from "next/image"
 
 export default function Home() {
@@ -11,7 +11,7 @@ export default function Home() {
   console.log(user);
   return (
     <div className="h-screen flex flex-column justify-center items-center">
-      <Image src={logo2} alt="logo" className="max-h-[500px]"/>
+      <Image src={logo4} alt="logo" className="max-h-[500px] w-[370px] rounded-full shadow-2xl"/>
       {/* <Link href="/signin">
         <button>Log-in</button>
       </Link>
