@@ -14,6 +14,14 @@ export async function fetchData() {
     }
 }
 
+export async function editLikes(quoteId, updatedLikes) {
+    try {
+        await axios.patch(`/api/addLikes?quoteId=${quoteId}`, { likes: updatedLikes });
+    } catch (error) {
+        console.error('Error editing quote:', error);
+    }
+};
+
 export default function Quote () {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -33,6 +41,17 @@ export default function Quote () {
     getData();
     }, []);
 
+    const handleLike = async (quoteId, currentLikes) => {
+        const updatedLikes = currentLikes + 1;
+        try {
+            await editLikes(quoteId, updatedLikes);
+            const updatedData = await fetchData(); // Refetch the data after updating likes
+            setData(updatedData);
+        } catch (error) {
+            console.error('Error liking quote:', error);
+        }
+    };
+
     if (loading) {
     return <div>Loading...</div>;
     }
@@ -49,7 +68,7 @@ export default function Quote () {
                 <h4 className='text-off-white text-lg font-montserrat font-light text-right italic'>{`-${quote.author}`}</h4>
                 <div className="flex justify-around items-center mt-4">
                     <h5 className='text-off-white inline-block text-xl text-center'>{quote.likes} Likes</h5>
-                    <button className='text-off-white ml-4 mr-4 bg-steel-blue py-2 px-4 rounded'>Like!</button>
+                    <button onClick={() => handleLike(quote.id, quote.likes)} className='text-off-white ml-4 mr-4 bg-steel-blue py-2 px-4 rounded'>Like!</button>
                     <h5 className='text-off-white text-sm font-montserrat font-light text-right italic'>{formattedDate}</h5>
                 </div>
             </div>
