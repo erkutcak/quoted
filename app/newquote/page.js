@@ -1,6 +1,6 @@
 'use client'
-import { db } from '@/firebase/firebaseApp';
-import { useEffect, useState, React } from 'react';
+
+import { useState, React } from 'react';
 import { useAuthContext } from '../context/AuthContext'
 import axios from 'axios';
 
