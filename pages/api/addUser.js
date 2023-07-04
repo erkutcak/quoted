@@ -6,6 +6,8 @@ export default async function handler(req, res) {
     console.log(req.body);
     try {
         const docRef = await addDoc(collection(db, "users"), {
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
             username: req.body.username,
             email: req.body.email,
             profile_pic: req.body.profile_pic,

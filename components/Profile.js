@@ -17,9 +17,9 @@ export async function fetchData(email) {
   }
 }
 
-export async function editUser(userId, newUsername) {
+export async function editUser(userId, newUsername, newFirstName, newLastName) {
   try {
-    const response = await axios.patch(`/api/editProfile?userId=${userId}`, { username: newUsername });
+    const response = await axios.patch(`/api/editProfile?userId=${userId}`, { username: newUsername, firstname: newFirstName, lastname: newLastName });
     return response.data;
   } catch (error) {
     console.error('Error editing user:', error);
@@ -33,6 +33,8 @@ export default function Profile() {
   const [userData, setUserData] = useState("");
   const [imageUrl, setImageUrl] = useState('');
   const [newUsername, setNewUsername] = useState('');
+  const [newFirstName, setNewFirstName] = useState("")
+  const [newLastName, setNewLastName] = useState("")
   const [editing, setEditing] = useState(false);
 
   useEffect(() => {
@@ -71,11 +73,13 @@ export default function Profile() {
   const handleEdit = () => {
     setEditing(true);
     setNewUsername(userData[0].username);
+    setNewFirstName(userData[0].firstname);
+    setNewLastName(userData[0].lastname);
   };
 
   const handleSave = async () => {
     try {
-      await editUser(userData[0].id, newUsername);
+      await editUser(userData[0].id, newUsername, newFirstName, newLastName);
       const updatedData = await fetchData(user.email);
       setUserData(updatedData);
       setEditing(false);
@@ -87,6 +91,8 @@ export default function Profile() {
   const handleCancel = () => {
     setEditing(false);
     setNewUsername(userData[0].username);
+    setNewFirstName(userData[0].firstname);
+    setNewLastName(userData[0].lastname);
   };
 
   console.log(userData);
@@ -107,8 +113,34 @@ export default function Profile() {
           {userData[0].username}
         </h2>
       )}
+      <h3 className="text-off-white text-md font-montserrat font-light italic">First Name:</h3>
+      {editing ? (
+        <input
+          type="text"
+          value={newFirstName}
+          onChange={(e) => setNewFirstName(e.target.value)}
+          className="text-off-white text-2xl font-montserrat font-medium italic mb-6 outline-none"
+        />
+      ) : (
+        <h2 className="text-off-white text-2xl font-montserrat font-medium italic mb-6">
+          {userData[0].firstname}
+        </h2>
+      )}
+      <h3 className="text-off-white text-md font-montserrat font-light italic">Last Name:</h3>
+      {editing ? (
+        <input
+          type="text"
+          value={newLastName}
+          onChange={(e) => setNewLastName(e.target.value)}
+          className="text-off-white text-2xl font-montserrat font-medium italic mb-6 outline-none"
+        />
+      ) : (
+        <h2 className="text-off-white text-2xl font-montserrat font-medium italic mb-6">
+          {userData[0].lastname}
+        </h2>
+      )}
       <h3 className="text-off-white text-md font-montserrat font-light italic">Email:</h3>
-      <h2 className="text-off-white text-2xl font-montserrat font-medium italic mb-6">{user.email}</h2>
+      <h2 className="text-off-white text-xl font-montserrat font-medium italic mb-6">{user.email}</h2>
       <div>
         {editing ? (
           <>

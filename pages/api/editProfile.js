@@ -4,11 +4,11 @@ import { doc, updateDoc } from "firebase/firestore";
 export default async function handler(req, res) {
   if (req.method === "PATCH") {
     const { userId } = req.query;
-    const { username } = req.body;
+    const { username, firstname, lastname } = req.body;
 
     try {
       const userRef = doc(db, "users", userId);
-      await updateDoc(userRef, { username });
+      await updateDoc(userRef, { username, firstname, lastname });
       res.status(200).json({ message: "Username updated successfully" });
     } catch (error) {
       console.error("Error editing user:", error);
