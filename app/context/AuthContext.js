@@ -3,6 +3,7 @@
 import React from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { initFirebase } from "../../firebase/firebaseApp";
+import { useRouter } from 'next/navigation';
 
 const auth = initFirebase;
 
@@ -14,9 +15,11 @@ export const AuthContextProvider = ({
     children,
 }) => {
     const [user, setUser] = React.useState(null);
+    const router = useRouter();
     const [loading, setLoading] = React.useState(true);
     const clear = () => {
         setUser(null);
+        router.push('/')
     };
 
     React.useEffect(() => {
@@ -35,7 +38,7 @@ export const AuthContextProvider = ({
     
 
     return (
-        <AuthContext.Provider value={{ user }}>
+        <AuthContext.Provider value={{ user, clear }}>
             {loading ? <div>Loading...</div> : children}
         </AuthContext.Provider>
     );

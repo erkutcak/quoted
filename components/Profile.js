@@ -44,7 +44,6 @@ export default function Profile() {
     try {
       await signOut(initFirebase);
       clear();
-      router.push('/');
     } catch (error) {
       console.error('Error signing out:', error);
     }
