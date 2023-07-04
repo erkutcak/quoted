@@ -4,7 +4,7 @@ import { useAuthContext } from '../../app/context/AuthContext'
 import { useRouter } from "next/navigation";
 
 export default function SignOut() {
-  const { clear, loading, authUser } = useAuthContext();
+  const { clear, loading, user } = useAuthContext();
   const router = useRouter();
 
   const handleSignOut = () => {
@@ -18,7 +18,7 @@ export default function SignOut() {
       });
   };
 
-  if (!loading && !authUser) {
+  if (!loading && !user) {
     handleSignOut();
   }
 

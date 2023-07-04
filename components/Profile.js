@@ -157,7 +157,7 @@ export default function Profile() {
         </h2>
       )}
       <h3 className="text-off-white text-md font-montserrat font-light italic">Email:</h3>
-      <h2 className="text-off-white text-xl font-montserrat font-medium italic mb-6">{user.email}</h2>
+      <h2 className="text-off-white text-xl font-montserrat font-medium italic mb-6">{userData[0].email}</h2>
       <div>
         {editing ? (
           <>

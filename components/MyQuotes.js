@@ -53,7 +53,7 @@ export default function MyQuotes() {
             }
         };
         getData();
-        }, [user.email]);
+        }, [user]);
 
     const handleDelete = async (quoteId) => {
         try {

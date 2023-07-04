@@ -24,7 +24,7 @@ export const AuthContextProvider = ({
             if (user) {
                 setUser(user);
             } else {
-                setUser(null);
+                clear();
             }
             setLoading(false);
         });
