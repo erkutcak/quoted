@@ -1,16 +1,26 @@
 import { initFirebase } from "../firebaseApp";
-import { signOut, getAuth } from "firebase/auth";
-import { useAuthContext } from '../context/AuthContext'
+import { signOut } from "firebase/auth";
+import { useAuthContext } from '../../app/context/AuthContext'
+import { useRouter } from "next/navigation";
 
-const auth = initFirebase;
+export default function SignOut() {
+  const { clear, loading, authUser } = useAuthContext();
+  const router = useRouter();
 
-export default async function signOut() {
-    const { authUser, loading } = useAuthContext();
-      // Listen for changes on loading and authUser, redirect if needed
-    useEffect(() => {
-    if (!loading && !authUser)
-        router.push('/')
-    }, [authUser, loading])
+  const handleSignOut = () => {
+    signOut(initFirebase)
+      .then(() => {
+        clear();
+        router.push('/');
+      })
+      .catch((error) => {
+        console.error('Error signing out:', error);
+      });
+  };
 
-    auth.signOut().then(clear);
+  if (!loading && !authUser) {
+    handleSignOut();
+  }
+
+  return null;
 }

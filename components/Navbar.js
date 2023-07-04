@@ -8,9 +8,8 @@ export default function Navbar() {
     console.log(user);
 
     return (
-        user && (
         <div className="fixed z-50 w-[95%] h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600"> 
-            <div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium bg-ash-black rounded-full">
+            {user ? (<div className="grid h-full max-w-lg grid-cols-4 mx-auto font-medium bg-ash-black rounded-full">
                 <Link href="/home" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group rounded-l-full">
                     <button type="button" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group rounded-l-full">
                         <svg className="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-steel-blue dark:group-hover:text-steel-blue" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -43,30 +42,25 @@ export default function Navbar() {
                         <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-steel-blue dark:group-hover:text-steel-blue">Profile</span>
                     </button>
                 </Link>
-            </div>
+            </div>) : (
+                <div className="grid h-full max-w-lg grid-cols-2 mx-auto font-medium bg-zinc-900 rounded-full">
+                <Link href="/signin" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group rounded-l-full">
+                    <button type="button" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group rounded-l-full">
+                        <svg className="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-steel-blue dark:group-hover:text-steel-blue" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
+                        </svg>
+                        <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-steel-blue dark:group-hover:text-steel-blue">Sign In</span>
+                    </button>
+                </Link>
+                <Link href="/signup" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group rounded-r-full">
+                    <button type="button" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group rounded-r-full">
+                        <svg className="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-steel-blue dark:group-hover:text-steel-blue" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4H1m3 4H1m3 4H1m3 4H1m6.071.286a3.429 3.429 0 1 1 6.858 0M4 1h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm9 6.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"/>
+                        </svg>
+                        <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-steel-blue dark:group-hover:text-steel-blue">Sign Up</span>
+                    </button>
+                </Link>
+        </div>)}
         </div>
-        )
     )
-    // return (
-    //     <div className="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600"> 
-    //         <div className="grid h-full max-w-lg grid-cols-2 mx-auto font-medium bg-zinc-900 rounded-full">
-    //             <Link href="/signin" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group rounded-l-full">
-    //                 <button type="button" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group rounded-l-full">
-    //                     <svg className="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-steel-blue dark:group-hover:text-steel-blue" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 16">
-    //                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"/>
-    //                     </svg>
-    //                     <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-steel-blue dark:group-hover:text-steel-blue">Sign In</span>
-    //                 </button>
-    //             </Link>
-    //             <Link href="/signup" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group rounded-r-full">
-    //                 <button type="button" className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group rounded-r-full">
-    //                     <svg className="w-6 h-6 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-steel-blue dark:group-hover:text-steel-blue" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-    //                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4H1m3 4H1m3 4H1m3 4H1m6.071.286a3.429 3.429 0 1 1 6.858 0M4 1h12a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1Zm9 6.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0Z"/>
-    //                     </svg>
-    //                     <span className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-steel-blue dark:group-hover:text-steel-blue">Sign Up</span>
-    //                 </button>
-    //             </Link>
-    //         </div>
-    //     </div>
-    // )
 }

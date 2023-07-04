@@ -5,7 +5,9 @@ import { useState, useEffect } from 'react'
 import { useAuthContext } from '../app/context/AuthContext'
 import axios from 'axios';
 import { ref, getDownloadURL } from 'firebase/storage'
-import { storage } from '../firebase/firebaseApp'
+import { initFirebase, storage } from '../firebase/firebaseApp'
+import { useRouter } from 'next/navigation';
+import { signOut } from 'firebase/auth';
 
 export async function fetchData(email) {
   try {
@@ -29,15 +31,30 @@ export async function editUser(userId, newUsername, newFirstName, newLastName) {
 
 export default function Profile() {
 
-  const { signOut, user } = useAuthContext();
+  const { clear, user } = useAuthContext();
   const [userData, setUserData] = useState("");
   const [imageUrl, setImageUrl] = useState('');
   const [newUsername, setNewUsername] = useState('');
   const [newFirstName, setNewFirstName] = useState("")
   const [newLastName, setNewLastName] = useState("")
   const [editing, setEditing] = useState(false);
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut(initFirebase);
+      clear();
+      router.push('/');
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
 
   useEffect(() => {
+    if (!user || !user.email) {
+      router.push('/');
+      return; // Add this line to prevent further execution of the code
+    }
     const fetchUserData = async () => {
       try {
         const response = await fetchData(user.email)
@@ -48,7 +65,7 @@ export default function Profile() {
     }
 
     fetchUserData()
-  }, [user.email])
+  }, [user])
 
   useEffect(() => {
     const fetchImageUrl = async () => {
@@ -163,7 +180,7 @@ export default function Profile() {
           </button>
         )}
         <Link href="/">
-          <button className="text-off-white ml-4 mr-4 bg-steel-blue py-2 px-4 rounded" onClick={signOut}>
+          <button className="text-off-white ml-4 mr-4 bg-steel-blue py-2 px-4 rounded" onClick={handleSignOut}>
             Log Out
           </button>
         </Link>

@@ -15,6 +15,9 @@ export const AuthContextProvider = ({
 }) => {
     const [user, setUser] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
+    const clear = () => {
+        setUser(null);
+    };
 
     React.useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
