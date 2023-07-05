@@ -3,11 +3,40 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { DateTime } from 'luxon';
+import { ref, getDownloadURL } from 'firebase/storage'
+import { storage } from '../firebase/firebaseApp'
 
 export async function fetchData() {
     try {
-        const response = await axios.get('/api/getData');
-        return response.data;
+      // quotes data
+        const quotesResponse = await axios.get('/api/getData');
+        const quotes = quotesResponse.data;
+        console.log(quotes);
+
+      // users data
+        const usersResponse = await axios.get('/api/getUsers');
+        const users = usersResponse.data;
+        console.log(users);
+
+      // Combine quotes and users
+        const quotesWithAuthorInfo = quotes.map((quote) => {
+        // author's details using their email
+            const author = users.find((user) => user.email === quote.author);
+
+            // new object combining quote and author details
+            return {
+                author: {
+                    profile_pic: author?.profile_pic,
+                    username: author?.username,
+                },
+                title: quote.title,
+                likes: quote.likes,
+                date: quote.date,
+            };
+        });
+        console.log(quotesWithAuthorInfo);
+        return quotesWithAuthorInfo;
+        
     } catch (error) {
         console.error('Error fetching data:', error);
         throw error;
@@ -26,26 +55,58 @@ export default function Quote () {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [imageUrl, setImageUrl] = useState('');
 
+    const placeholderImage = '/placeholder.png';
+
+    
     useEffect(() => {
-    const getData = async () => {
-        try {
-        const responseData = await fetchData();
-        setData(responseData);
-        setLoading(false);
-        } catch (error) {
-        setError(error);
-        setLoading(false);
+        const getData = async () => {
+          try {
+            console.log('Fetching data...');
+            const responseData = await fetchData();
+            console.log('Data received:', responseData);
+            setData(responseData);
+            setLoading(false);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+            setError(error);
+            setLoading(false);
+          }
+        };
+      
+        getData();
+      }, []);
+      
+      useEffect(() => {
+        const fetchImageUrl = async () => {
+          try {
+            const authorProfilePics = data
+              .map((quote) => quote.author?.profile_pic)
+              .filter(Boolean);
+            const imageUrlPromises = authorProfilePics.map((profilePic) => {
+              const storageRef = ref(storage, `images/${profilePic}`);
+              return getDownloadURL(storageRef);
+            });
+            const imageUrls = await Promise.all(imageUrlPromises);
+            setImageUrl(imageUrls);
+          } catch (error) {
+            console.error('Error fetching image URLs:', error);
+          }
+        };
+      
+        if (data.length > 0) {
+          fetchImageUrl();
         }
-    };
-    getData();
-    }, []);
+      }, [data]);
+
+    console.log(data);
 
     const handleLike = async (quoteId, currentLikes) => {
         const updatedLikes = currentLikes + 1;
         try {
             await editLikes(quoteId, updatedLikes);
-            const updatedData = await fetchData(); // Refetch the data after updating likes
+            const updatedData = await fetchData();
             setData(updatedData);
         } catch (error) {
             console.error('Error liking quote:', error);
@@ -60,12 +121,17 @@ export default function Quote () {
     return <div>Error: {error.message}</div>;
     }
 
-    const displayQuotes = data.map((quote) => {
+    const displayQuotes = data.map((quote, index) => {
         const formattedDate = DateTime.fromISO(quote.date).toFormat('MM/dd/yyyy - HH:mm');
+        const author = quote.author || {};
+        const { profile_pic, username } = author;
+        const imageSrc = profile_pic && imageUrl.length > 0 ? imageUrl[index] || placeholderImage : placeholderImage;
+
         return (
-            <div key={quote.id} className="h-full w-full max-w-lg mx-auto mb-5 font-medium px-4 py-2 rounded-md bg-[#A37774] shadow-xl">
+            <div key={index} className="h-full w-full max-w-lg mx-auto mb-5 font-medium px-4 py-2 rounded-md bg-[#A37774] shadow-xl">
+                <img src={imageSrc} alt={username} className="w-[30px] h-[30px] rounded-full mx-auto my-4" />
                 <h3 className='text-off-white text-xl font-montserrat font-medium italic'>{`"${quote.title}"`}</h3>
-                <h4 className='text-off-white text-lg font-montserrat font-light text-right italic'>{`-${quote.author}`}</h4>
+                <h4 className='text-off-white text-lg font-montserrat font-light text-right italic'>{`-${username || ''}`}</h4>
                 <div className="flex justify-around items-center mt-4">
                 <button className="flex items-center justify-start border-none rounded-lg overflow-hidden shadow-md cursor-pointer bg-transparent w-30 h-35" onClick={() => handleLike(quote.id, quote.likes)}>
                     <span className="w-[60px] h-full flex items-center justify-start gap-2 bg-red-500 pl-[5px] pr-[5px] transition-colors duration-300 hover:bg-red-700 active:bg-red-800">

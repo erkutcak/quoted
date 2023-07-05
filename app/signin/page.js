@@ -11,16 +11,13 @@ export default function SignIn() {
 
     const handleForm = async (event) => {
         event.preventDefault()
-
         const { result, error } = await signIn(email, password);
-
         if (error) {
             return console.log(error)
         }
-
-        // else successful
         return router.push("/home")
     }
+    
     return (
         <div className='flex flex-col items-center justfiy-center mt-5 top-20'>
             <h1 className='font-archivoblack text-2xl mb-5'>-welcome back.</h1>

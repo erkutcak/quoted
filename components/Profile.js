@@ -52,7 +52,7 @@ export default function Profile() {
   useEffect(() => {
     if (!user || !user.email) {
       router.push('/');
-      return; // Add this line to prevent further execution of the code
+      return;
     }
     const fetchUserData = async () => {
       try {

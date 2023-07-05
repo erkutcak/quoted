@@ -2,12 +2,12 @@
 
 import Link from "next/link"
 import { useAuthContext } from "../app/context/AuthContext";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function Navbar() {
     
     const { user } = useAuthContext()
-    const [activeButton, setActiveButton] = useState('home');
+    const [activeButton, setActiveButton] = useState('');
 
     const handleButtonClick = (buttonName) => {
         setActiveButton(buttonName);
