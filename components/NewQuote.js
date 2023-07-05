@@ -31,10 +31,10 @@ export default function NewQuote() {
     console.log(content);
   
     return (
-        <form className="form flex flex-col items-center justify-center h-full w-full max-w-lg mx-auto mb-5 font-medium px-4 py-2 rounded-md bg-[#A37774] shadow-xl" onSubmit={onSubmit}>
+      <form className="form flex flex-col items-center justify-center h-full w-[95%] max-w-lg mx-auto mb-5 font-medium px-4 py-2 rounded-md bg-[#A37774] shadow-xl" onSubmit={onSubmit}>
           <label className="flex flex-col w-full">
               <textarea
-                className='py-4 px-6 text-off-white rounded-lg mt-4 outlined-none border font-medium bg-[#A37774] w-full'
+                className='py-4 px-6 text-white rounded-lg mt-4 outlined-none border font-medium bg-[#A37774] w-full italic'
                 id="name"
                 type="text"
                 name="title"
