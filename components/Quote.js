@@ -32,6 +32,7 @@ export async function fetchData() {
                 title: quote.title,
                 likes: quote.likes,
                 date: quote.date,
+                id: quote.id,
             };
         });
         console.log(quotesWithAuthorInfo);
@@ -122,6 +123,7 @@ export default function Quote () {
     }
 
     const displayQuotes = data.map((quote, index) => {
+      console.log(quote.likes);
         const formattedDate = DateTime.fromISO(quote.date).toFormat('MM/dd/yyyy - HH:mm');
         const author = quote.author || {};
         const { profile_pic, username } = author;

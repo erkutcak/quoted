@@ -2,6 +2,8 @@ import { db } from "../../firebase/firebaseApp";
 import { doc, updateDoc } from "firebase/firestore";
 
 export default async function handler(req, res) {
+    console.log(req.body);
+    console.log(req.query);
     if (req.method === "PATCH") {
         const { quoteId } = req.query;
         const { likes } = req.body;
