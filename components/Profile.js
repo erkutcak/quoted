@@ -120,7 +120,7 @@ export default function Profile() {
           type="text"
           value={newUsername}
           onChange={(e) => setNewUsername(e.target.value)}
-          className="text-off-white text-2xl font-montserrat font-medium italic mb-6 outline-none"
+          className="text-off-white text-2xl font-montserrat font-medium italic mb-1 outline-none"
         />
       ) : (
         <h2 className="text-off-white text-2xl font-montserrat font-medium italic mb-6">
@@ -133,7 +133,7 @@ export default function Profile() {
           type="text"
           value={newFirstName}
           onChange={(e) => setNewFirstName(e.target.value)}
-          className="text-off-white text-2xl font-montserrat font-medium italic mb-6 outline-none"
+          className="text-off-white text-2xl font-montserrat font-medium italic mb-1 outline-none"
         />
       ) : (
         <h2 className="text-off-white text-2xl font-montserrat font-medium italic mb-6">
@@ -146,7 +146,7 @@ export default function Profile() {
           type="text"
           value={newLastName}
           onChange={(e) => setNewLastName(e.target.value)}
-          className="text-off-white text-2xl font-montserrat font-medium italic mb-6 outline-none"
+          className="text-off-white text-2xl font-montserrat font-medium italic mb-1 outline-none"
         />
       ) : (
         <h2 className="text-off-white text-2xl font-montserrat font-medium italic mb-6">

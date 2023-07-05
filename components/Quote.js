@@ -12,12 +12,10 @@ export async function fetchData() {
       // quotes data
         const quotesResponse = await axios.get('/api/getData');
         const quotes = quotesResponse.data;
-        console.log(quotes);
 
       // users data
         const usersResponse = await axios.get('/api/getUsers');
         const users = usersResponse.data;
-        console.log(users);
 
       // Combine quotes and users
         const quotesWithAuthorInfo = quotes.map((quote) => {
@@ -36,7 +34,6 @@ export async function fetchData() {
                 id: quote.id,
             };
         });
-        console.log(quotesWithAuthorInfo);
         return quotesWithAuthorInfo;
         
     } catch (error) {
@@ -65,9 +62,7 @@ export default function Quote () {
     useEffect(() => {
         const getData = async () => {
           try {
-            console.log('Fetching data...');
             const responseData = await fetchData();
-            console.log('Data received:', responseData);
             setData(responseData);
             setLoading(false);
           } catch (error) {
@@ -140,7 +135,7 @@ export default function Quote () {
           }}
           >
             <div key={index} className="h-full w-full max-w-lg mx-auto mb-5 font-medium px-4 py-2 rounded-md bg-[#A37774] shadow-xl">
-                <img src={imageSrc} alt={username} className="w-[30px] h-[30px] rounded-full ml-auto my-4" />
+                <img src={imageSrc} alt={username} className="w-[25px] rounded-full ml-auto my-4" />
                 <h3 className='text-off-white text-xl font-montserrat font-medium italic'>{`"${quote.title}"`}</h3>
                 <h4 className='text-off-white text-lg font-montserrat font-light text-right italic'>{`-${username || ''}`}</h4>
                 <div className="flex justify-around items-center mt-4">

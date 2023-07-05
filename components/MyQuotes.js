@@ -5,6 +5,8 @@ import axios from 'axios';
 import { DateTime } from 'luxon';
 import { useAuthContext } from '@/app/context/AuthContext';
 import Modal from 'react-modal';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 export async function fetchData(author) {
     try {
@@ -61,6 +63,11 @@ export default function MyQuotes() {
             await deleteQuote(quoteId);
             const updatedData = await fetchData(user.email);
             setData(updatedData);
+            toast('Quote Deleted!', {
+                hideProgressBar: false,
+                autoClose: 4600,
+                type: "success",
+            });
         } catch (error) {
             console.error('Error deleting quote:', error);
         }
@@ -102,7 +109,8 @@ export default function MyQuotes() {
     const displayQuotes = data.map((quote) => {
         const formattedDate = DateTime.fromISO(quote.date).toFormat('MM/dd/yyyy - HH:mm');
         return (
-                <div key={quote.id} className="h-full w-full max-w-lg mx-auto mb-5 font-medium px-4 py-2 rounded-md bg-[#A37774] shadow-xl">
+            <div key={quote.id} className="h-full w-full max-w-lg mx-auto mb-5 font-medium px-4 py-2 rounded-md bg-[#A37774] shadow-xl">
+                    <ToastContainer />
                     <h3 className='text-off-white text-xl font-montserrat font-medium italic'>{`"${quote.title}"`}</h3>
                     <h4 className='text-off-white text-lg font-montserrat font-light text-right italic'>{`-${quote.author}`}</h4>
                     <div className="flex justify-around items-center mt-4">
