@@ -72,7 +72,7 @@ export default function SignUp() {
 
 
     return (
-        <div className='flex flex-col items-center justfiy-center mt-5 top-20'>
+        <div className='flex flex-col items-center justfiy-center mt-5 top-20 h-[100vh] overflow-y-scroll'>
             <h1 className='font-archivoblack text-2xl mb-5'>-signup.</h1>
             <div className="flex flex-col items-center justify-center w-[95%] max-w-lg mx-auto mb-5 font-medium px-4 py-8 rounded-md bg-[#A37774] shadow-xl">
                 <form onSubmit={handleForm} className='flex flex-col items-center justfiy-center'>

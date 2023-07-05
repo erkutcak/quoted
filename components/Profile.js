@@ -114,7 +114,7 @@ export default function Profile() {
   console.log(userData);
 
   return (
-    <div className="flex flex-col items-center justify-center w-[95%] max-w-lg mx-auto mb-5 font-medium px-4 py-8 rounded-md bg-[#A37774] shadow-xl">
+    <div className="flex flex-col items-center justify-center w-[95%] max-w-lg mx-auto mb-5 font-medium px-4 py-8 rounded-md bg-[#A37774] shadow-xl h-[100vh] overflow-y-scroll">
       <img src={imageUrl} alt={userData[0].username} className="w-[120px] mb-6 rounded-full" />
       <h3 className="text-off-white text-md font-montserrat font-light italic">Username:</h3>
       {editing ? (
