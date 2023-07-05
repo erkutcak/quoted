@@ -111,8 +111,6 @@ export default function Profile() {
     setNewLastName(userData[0].lastname);
   };
 
-  console.log(userData);
-
   return (
     <div className="flex flex-col items-center justify-center w-[95%] max-w-lg mx-auto mb-5 font-medium px-4 py-8 rounded-md bg-[#A37774] shadow-xl h-[100vh] overflow-y-scroll">
       <img src={imageUrl} alt={userData[0].username} className="w-[120px] mb-6 rounded-full" />

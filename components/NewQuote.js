@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useAuthContext } from '@/app/context/AuthContext';
 import axios from 'axios';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function NewQuote() {
 
@@ -14,13 +16,25 @@ export default function NewQuote() {
       date: new Date().toISOString(),
     })
   
-    const onSubmit = async () => {
+    const onSubmit = async (e) => {
+      e.preventDefault();
       const { title, author, likes, date } = content;
       await axios.post('/api/addData', { title, author, likes, date },  {
         headers: {
           'Content-Type': 'application/json'
         }
-      })
+      });
+      setContent({
+        title: "",
+        author: user ? user.email : "",
+        likes: 0,
+        date: new Date().toISOString(),
+      });
+      toast('📝 New Quote Posted!', {
+        hideProgressBar: false,
+        autoClose: 4600,
+        type: "success",
+    });
     } 
   
     const onChange = (e) => {
@@ -28,10 +42,9 @@ export default function NewQuote() {
       setContent(prevState => ({ ...prevState, [name]: value }));
     }
   
-    console.log(content);
-  
     return (
       <form className="form flex flex-col items-center justify-center h-full w-[95%] max-w-lg mx-auto mb-5 font-medium px-4 py-2 rounded-md bg-[#A37774] shadow-xl" onSubmit={onSubmit}>
+        <ToastContainer />
           <label className="flex flex-col w-full">
               <textarea
                 className='py-4 px-6 text-white rounded-lg mt-4 outlined-none border font-medium bg-[#A37774] w-full italic'
