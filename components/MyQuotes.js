@@ -45,7 +45,8 @@ export default function MyQuotes() {
         const getData = async () => {
             try {
             const responseData = await fetchData(user.email);
-            setData(responseData);
+            const sortedData = responseData.sort((a, b) => b.date.localeCompare(a.date));
+            setData(sortedData);
             setLoading(false);
             } catch (error) {
             setError(error);
