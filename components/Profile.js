@@ -112,49 +112,49 @@ export default function Profile() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center w-[95%] max-w-lg mx-auto mb-5 font-medium px-4 py-8 rounded-md bg-[#A37774] shadow-xl h-[100vh] overflow-y-scroll">
+    <div className="flex flex-col items-center justify-center w-[95%] max-w-lg mx-auto mb-2 font-medium px-4 py-8 rounded-md bg-[#A37774] shadow-xl h-[65%] overflow-y-scroll">
       <img src={imageUrl} alt={userData[0].username} className="w-[120px] mb-6 rounded-full" />
-      <h3 className="text-off-white text-md font-montserrat font-light italic">Username:</h3>
+      <h3 className="text-off-white text-md font-montserrat font-light border px-[14px]">Username</h3>
       {editing ? (
         <input
           type="text"
           value={newUsername}
           onChange={(e) => setNewUsername(e.target.value)}
-          className="text-off-white text-2xl font-montserrat font-medium italic mb-1 outline-none"
+          className="text-off-white text-xl font-montserrat font-medium mb-1 outline-none"
         />
       ) : (
-        <h2 className="text-off-white text-2xl font-montserrat font-medium italic mb-6">
+        <h2 className="text-off-white text-xl font-montserrat font-medium mb-6">
           {userData[0].username}
         </h2>
       )}
-      <h3 className="text-off-white text-md font-montserrat font-light italic">First Name:</h3>
+      <h3 className="text-off-white text-md font-montserrat font-light border px-[14px]">First Name</h3>
       {editing ? (
         <input
           type="text"
           value={newFirstName}
           onChange={(e) => setNewFirstName(e.target.value)}
-          className="text-off-white text-2xl font-montserrat font-medium italic mb-1 outline-none"
+          className="text-off-white text-xl font-montserrat font-medium mb-1 outline-none"
         />
       ) : (
-        <h2 className="text-off-white text-2xl font-montserrat font-medium italic mb-6">
+        <h2 className="text-off-white text-xl font-montserrat font-medium mb-6">
           {userData[0].firstname}
         </h2>
       )}
-      <h3 className="text-off-white text-md font-montserrat font-light italic">Last Name:</h3>
+      <h3 className="text-off-white text-md font-montserrat font-light border px-[14px]">Last Name</h3>
       {editing ? (
         <input
           type="text"
           value={newLastName}
           onChange={(e) => setNewLastName(e.target.value)}
-          className="text-off-white text-2xl font-montserrat font-medium italic mb-1 outline-none"
+          className="text-off-white text-xl font-montserrat font-medium mb-1 outline-none"
         />
       ) : (
-        <h2 className="text-off-white text-2xl font-montserrat font-medium italic mb-6">
+        <h2 className="text-off-white text-xl font-montserrat font-medium mb-6">
           {userData[0].lastname}
         </h2>
       )}
-      <h3 className="text-off-white text-md font-montserrat font-light italic">Email:</h3>
-      <h2 className="text-off-white text-xl font-montserrat font-medium italic mb-6">{userData[0].email}</h2>
+      <h3 className="text-off-white text-md font-montserrat font-light border px-[14px]">Email</h3>
+      <h2 className="text-off-white text-xl font-montserrat font-medium mb-6">{userData[0].email}</h2>
       <div>
         {editing ? (
           <>
